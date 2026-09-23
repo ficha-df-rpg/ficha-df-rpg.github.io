@@ -1,0 +1,298 @@
+/** Name: style.css
+Author: Mennonimo
+Date: 17/07
+Description: Style geral contendo algumas modificações gerais não específicas
+**/
+
+
+/* ---- Level stepper ---- */
+
+.stepper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
+.stepper button {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 2px solid var(--border-dim);
+    background: var(--panel2);
+    color: var(--text);
+    font-family: var(--font-b);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.stepper button:hover {
+    background: var(--soul);
+    color: #06070f;
+}
+
+.level-val {
+    font-family: var(--font-d);
+    font-size: 17px;
+    min-width: 24px;
+    text-align: center;
+    color: var(--soul);
+}
+
+.points-note {
+    font-size: 18px;
+    color: var(--text-dim);
+    margin-top: 4px;
+}
+
+.points-note .hi {
+    color: var(--yellow);
+    font-weight: bold;
+}
+
+.points-note.over .hi {
+    color: var(--red);
+}
+
+
+/* ---- Botões de Ataque e Mercy ---- */
+
+.action-buttons {
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 25%;
+}
+
+.attack,
+.mercy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    border: var(--box-battle) solid 2px;
+}
+
+.attack h2,
+.mercy h2 {
+    font-family: var(--font-d);
+    font-size: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ---- Stat boxes (ATK DEF MAG together) ---- */
+
+.stat-grid {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-block: 20px;
+    align-items: center;
+}
+
+.stat-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+    border-radius: 4px;
+    padding: 6px 4px;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+.stat-box .stat-label {
+    font-size: 22px;
+    color: var(--text-dim);
+}
+
+.stat-box .stat-val {
+    font-family: var(--font-d);
+    font-size: 20px;
+    color: var(--soul);
+}
+
+.stat-box .stat-bonus {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    justify-content: center;
+    margin-top: 3px;
+}
+
+.stat-box .stat-bonus input {
+    width: 38px !important;
+    font-size: 18px;
+    padding: 2px;
+}
+
+.stat-box .stat-bonus label {
+    font-size: 17px;
+    color: var(--text-dim);
+}
+
+
+/* ---- Soul selector ---- */
+
+.soul-row {
+    display: flex;
+    height: 35px;
+    align-items: center;
+}
+
+.soul-swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    margin-right: 8px;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+#customAlmaBox {
+    display: none;
+    margin-top: 6px;
+    align-items: center;
+    gap: 8px;
+}
+
+input[type=number] select {
+    font-size: 24px;
+}
+
+select option {
+    background: #1a1230;
+    color: #fff;
+}
+
+input[type=text].campoInfo {
+    background-color: transparent;
+    font-size: 24px;
+    border: 2px solid var(--border);
+    padding: 3px
+}
+
+
+/* ---- Notes ---- */
+
+.notes-grid {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px
+}
+
+.notes-grid textarea {
+    box-sizing: border-box;
+    flex: 1;
+}
+
+
+/* ---- Misc ---- */
+
+.subtle {
+    color: var(--text-dim);
+    font-size: 25px;
+    font-family: var(--font-b);
+}
+
+.add-row {
+    margin-top: 6px;
+}
+
+.field-pair {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 6px;
+}
+
+.field-pair>div {
+    flex: 1;
+}
+
+
+/* ---- Responsive ---- */
+
+@media(max-width:900px) {
+    .page-body {
+        flex-direction: column;
+    }
+    .pericias-cols {
+        grid-template-columns: 1fr;
+    }
+    .notes-grid {
+        grid-template-columns: 1fr;
+    }
+    .stat-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .items-list {
+        grid-template-columns: 1fr;
+    }
+    .pager-btn {
+        width: 60px;
+        height: 60px;
+    }
+    .pager-btn .icon {
+        font-size: 20px;
+    }
+}
+
+
+/* ---- PRINT ---- */
+
+@media print {
+    body {
+        background: var(--bg) !important;
+    }
+    body::before {
+        display: block !important;
+    }
+    .star-bg {
+        display: block !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+    .toolbar {
+        display: none !important;
+    }
+    .pager {
+        display: none !important;
+    }
+    .sheet-wrap {
+        margin: 0;
+        padding: 0;
+        max-width: none;
+    }
+    .page {
+        position: relative;
+        display: block !important;
+        page-break-after: always;
+        margin-bottom: 0;
+        box-shadow: none;
+    }
+    .page:last-child {
+        page-break-after: auto;
+    }
+    input,
+    textarea,
+    select {
+        border-color: #555 !important;
+    }
+    @page {
+        size: landscape;
+        margin: 8mm;
+        background: #06070f;
+    }
+}

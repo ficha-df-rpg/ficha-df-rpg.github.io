@@ -1,0 +1,58 @@
+{
+  "personagem": {
+    "nome": "Personagem 1",
+    "nivel": 1,
+    "alma": "Determinação",
+    "cor": "#cd0b22"
+  },
+  "combate": {
+    "hp": 6,
+    "hpMax": 6,
+    "hope": 5,
+    "hopeMax": 5,
+    "love": 0,
+    "karma": 5,
+    "atk": 25,
+    "def": 6,
+    "mag": 0
+  },
+  "atributos": {
+    "GRR": 5,
+    "FRM": 2,
+    "RPZ": 2,
+    "ESP": 0,
+    "CHM": 0,
+    "MRL": 0
+  },
+  "equipamentos": {
+    "arma": {
+      "nome": "",
+      "desc": "",
+      "categoria": "",
+      "tipo": ""
+    },
+    "armadura": {
+      "nome": "",
+      "desc": ""
+    },
+    "amuleto": {
+      "nome": "",
+      "desc": ""
+    }
+  },
+  "habilidades": [
+    {
+      "nome": "afaf",
+      "custo": "",
+      "elemento": "",
+      "descricao": "Menu 1"
+    },
+    {
+      "nome": "gaga",
+      "custo": "gagag",
+      "elemento": "gaga",
+      "descricao": "",
+      "acao": "tqtqt"
+    }
+  ]
+}

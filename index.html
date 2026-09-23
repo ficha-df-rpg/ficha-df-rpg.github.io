@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!--
+Name: DON'T FORGET V4
+Author: Mennonimo
+Date: 15/07/2026
+Description: Ficha interativa de rpg para um sistema de Don't Forget contendo a estrutura principal e o arquivo primario do site.
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don't Forget — Ficha de Personagem</title>
+    <link rel="stylesheet" href="core.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="renders.css">
+    <link rel="stylesheet" href="structures.css">
+
+    <!-- Mantenha nessa ordem para garantir o funcionamente adequado das funções: -->
+    <script defer src="rules.js"></script>
+
+    <script defer src="Renders/atributos.js"></script>
+    <script defer src="Renders/items.js"></script>
+    <script defer src="Renders/levels.js"></script>
+    <script defer src="Renders/skills.js"></script>
+    <script defer src="Renders/status.js"></script>
+
+    <script defer src="controls.js"></script>
+
+    <script defer src="script.js" defer></script>
+
+    <!-- ============================================================
+  DON'T FORGET — Ficha Interativa v3
+  Visual: ficha.html | Mecânicas: index.html (melhorado)
+============================================================
+-->
+</head>
+
+<body>
+
+    <div class="star-bg"></div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar no-print">
+        <div class="app-title"><span class="spark">✦</span> DON'T FORGET <span style="font-size:11px;color:var(--text-dim);font-family:var(--font-b);">— ficha interativa</span></div>
+        <button class="btn primary" id="btnPrint">⤓ Exportar PDF</button>
+        <button class="btn" id="btnExport">💾 Exportar JSON</button>
+        <button class="btn" id="btnImport">📂 Importar JSON</button>
+        <button class="btn" id="btnSimulador">⚔️ Copiar p/ Simulador</button>
+        <input type="file" id="importFile" accept=".json" style="display:none;">
+        <button class="btn danger" id="btnReset">Limpar Ficha</button>
+        <div class="storage-note" id="storageNote"></div>
+    </div>
+
+    <!-- PAGER -->
+    <div class="pager no-print" id="pager">
+        <button class="pager-btn active" data-page="1">
+        <img src="assets/Personagem.png" alt="Personagem">
+    </button>
+
+        <button class="pager-btn" data-page="2">
+        <img src="assets/Itens.png" alt="Itens">
+    </button>
+
+        <button class="pager-btn" data-page="3">
+        <img src="assets/Moral.png" alt="Habilidades">
+    </button>
+
+        <!-- <button class="pager-btn" data-page="4">
+        <img src="assets/habilidades.png" alt="Anotações">
+    </button> -->
+
+        <button class="pager-btn" data-page="5">
+        <img src="assets/anotações.png" alt="Anotações">
+    </button>
+    </div>
+
+    <div class="sheet-wrap">
+        <!-- =================== PAGE 1: PERSONAGEM =================== -->
+        <section class="page active" id="page1">
+            <div class="page-body">
+
+                <!-- COL 1: portrait + info básica -->
+                <div class="row" style="height: 40%; position: relative;">
+
+                    <div class="perfil">
+                        <div class="panel-title" style="top: -40px;"><img class="img-title" src="assets/estrela.png"></img> PERSONAGEM</div>
+                        <input type="text" name="Nome do Personagem" id="charName" placeholder="NOME">
+                        <div class="portrait-wrap">
+                            <div class="portrait" id="portraitBtn1" title="Clique para enviar foto">
+                                <svg class="soul-spark" viewBox="0 0 24 24" id="soulSvg1"><path d="M12 0 L14 9 L24 12 L14 15 L12 24 L10 15 L0 12 L10 9 Z"/></svg>
+                                <img id="portraitImg1" style="display:none;">
+                            </div>
+                            <div class="hint">clique para adicionar foto</div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <div class="attack">
+                                <h2>ATTACK</h2>
+                            </div>
+                            <div class="mercy">
+                                <h2>MERCY</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="file" accept="image/*" id="photoInput" style="display:none;">
+
+                    <div class="personagem" class="panel-box">
+                        <!-- <div class="panel-title"><span class="ic">★</span> PERSONAGEM</div> -->
+                        <div class="campo">
+                            <label class="f">Título</label>
+                            <input type="text" id="charTitle" placeholder="Título">
+                        </div>
+
+                        <div class="campo">
+                            <label class="f">Nível</label>
+
+                            <div class="stepper">
+                                <button id="lvlMinus">−</button>
+                                <span class="level-val" id="lvlVal">1</span>
+                                <button id="lvlPlus">+</button>
+                            </div>
+                        </div>
+
+                        <div class="points-note" id="attrPointsNote">Pontos: <span class="hi">0/12</span> · Máx/atrib: <span class="hi" id="attrMaxNote">5</span></div>
+                    </div>
+                </div>
+
+                <article style="height: 60%;">
+                    <div class="color-lines">
+                        <span style="border: 3px solid; border-image: linear-gradient(to right, transparent, var(--red)) 1;"></span>
+                        <span style="border: 3px solid; border-image: linear-gradient(to right, transparent, var(--orange)) 1;"></span>
+                        <span style="border: 3px solid; border-image: linear-gradient(to right, transparent, var(--yellow)) 1;"></span>
+                        <span style="border: 3px solid; border-image: linear-gradient(to right, transparent, var(--purple)) 1;"></span>
+                        <span style="border: 3px solid; border-image: linear-gradient(to right, transparent, var(--green)) 1;"></span>
+                        <span style="border: 3px solid; border-image: linear-gradient(to right, transparent, var(--blue)) 1;"></span>
+                    </div>
+                    <!-- COL 2: atributos -->
+                    <div class="col" style="width: 35%;">
+                        <div class="panel-box">
+                            <div class="panel-title" style="top: -15px"><img class="img-title" src="assets/Star.png"></img> ATRIBUTOS</div>
+                            <div id="attrList" style="margin-top:6px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- COL 3: perícias -->
+                    <div class="col" style="width: 65%;">
+                        <div class="panel-perices">
+                            <div class="panel-title" style="top: -15px;"><img class="img-title" src="assets/Espada.png"></img> PERÍCIAS <span class="subtle" style="font-size:15px;margin-left:4px;">máx/perícia: <span id="skillCapNote">2</span></span>
+                            </div>
+                            <div class="pericias-tab" id="skillList"></div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- =================== PAGE 2: STATUS =================== -->
+        <section class="page" id="page2">
+
+            <div class="titulos-equips">
+                <div style="width: 50%;">
+                    <div class="panel-title-equips"><span class="ic">◈</span> PERSONAGEM</div>
+                </div>
+                <div style="width: 50%;">
+                    <div class="panel-title-equips"><span class="ic">♥</span> EQUIPADOS</div>
+                </div>
+            </div>
+
+            <div class="sheet-title">EQUIPAMENTO &amp; STATUS</div>
+            <div class="page-body">
+
+                <!-- COL 1: foto + equipados + itens -->
+                <div class="col" style="display: flex; height: 30%;">
+                    <div class="row-equips">
+                        <div class="portrait-wrap" style="width: 50%;">
+                            <div class="portrait" id="portraitBtn2">
+                                <svg class="soul-spark" viewBox="0 0 24 24" id="soulSvg2"><path d="M12 0 L14 9 L24 12 L14 15 L12 24 L10 15 L0 12 L10 9 Z"/></svg>
+                                <img id="portraitImg2" style="display:none;">
+                            </div>
+                        </div>
+
+                        <div class="panel-equips">
+                            <div class="equip-box" style="height: 80px;">
+
+                                <div style="display: flex; flex-direction: row; align-items: center;">
+                                    <div class="eq-title">ARMA</div>
+                                    <input type="text" class="inputarEq" id="eqArmaNome" placeholder="Nome da arma" style="margin-bottom:3px;">
+                                </div>
+
+                                <div style="display: flex; flex-direction: row; width: max-content; padding-left: 10px;">
+                                    <div style="padding-inline: 8px;"><label class="f" style="font-size:12px;">Categoria</label><input type="text" class="inputarEq" id="eqArmaCategoria" placeholder="ex: Espada"></div>
+                                    <div style="padding-inline: 8px;"><label class="f" style="font-size:12px;">Tipo</label><input type="text" class="inputarEq" id="eqArmaTipo" placeholder="ex: Cortante"></div>
+                                </div>
+                                <!-- <textarea id="eqArmaDesc" rows="2" placeholder="Descrição / efeito"></textarea> -->
+                            </div>
+                            <div class="equip-box" style="width: 75%;">
+                                <div class="eq-title">ARMADURA</div>
+                                <input type="text" class="inputarEq" id="eqArmaduraNome" placeholder="Nome da armadura" style="margin-bottom:3px;">
+                                <!-- <textarea id="eqArmaduraDesc" rows="2" placeholder="Descrição / efeito"></textarea> -->
+                            </div>
+                            <div class="equip-box" style="width: 75%;">
+                                <div class="eq-title">AMULETO</div>
+                                <input type="text" class="inputarEq" id="eqAmuletoNome" placeholder="Nome do amuleto" style="margin-bottom:3px;">
+                                <!-- <textarea id="eqAmuletoDesc" rows="2" placeholder="Descrição / efeito"></textarea> -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COL 2: status principal -->
+                <div class="col" style="height: 70%">
+                    <div class="row-status" style="height: 100%">
+                        <div class="panel-box" style="display: flex; flex-direction: column; width: 50%;">
+                            <div class="panel-title" style="top: -15px;"><span class="ic">♦</span> STATUS</div>
+
+
+                            <!-- HP barra -->
+                            <div class="meter-row">
+                                <div class="popUp">
+                                    <input class="popUpInput" type="text" id="popUpHp">
+                                </div>
+                                <span class="meter-label">HP</span>
+                                <button class="meter-btn no-print" id="hpMinus">−</button>
+                                <div class="meter-bar-wrap" id="hpBarWrap" title="Clique para ajustar HP">
+                                    <div class="meter-bar hp" id="hpBar" style="width:100%;"></div>
+                                    <span class="meter-bar-label" id="hpBarLabel">20 / 20</span>
+                                </div>
+                                <button class="meter-btn no-print" id="hpPlus">+</button>
+                                <button class="meter-btn meter-btn-full no-print" id="hpFull" title="Recuperar HP total">♥</button>
+                            </div>
+
+                            <div class="hp-bonus-row">
+                                <div style="display: flex; flex-direction: column; align-items: center;"><label>Bônus Classe</label><input style="width: 50%;" type="number" id="hpClassBonus" value="0" min="0"></div>
+                                <div style="display: flex; flex-direction: column; align-items: center;"><label>DEF base</label><input class="campo-de-defesa" style="width: 50%;" type="number" id="hpDefBase" readonly></div>
+                                <div style="display: flex; flex-direction: column; align-items: center;"><label>Bônus manual</label><input style="width: 50%;" type="number" id="hpManualBonus" value="0" min="0"></div>
+                            </div>
+
+                            <!-- HOPE barra -->
+                            <div class="meter-row">
+                                <div class="popUp">
+                                    <input class="popUpInput" type="text" id="popUpHope">
+                                </div>
+                                <span class="meter-label">HOPE</span>
+                                <button class="meter-btn no-print" id="hopeMinus">−</button>
+                                <div class="meter-bar-wrap" id="hopeBarWrap" title="Clique para ajustar HOPE">
+                                    <div class="meter-bar hope" id="hopeBar" style="width:100%;"></div>
+                                    <span class="meter-bar-label" id="hopeBarLabel">10 / 10</span>
+                                </div>
+                                <button class="meter-btn no-print" id="hopePlus">+</button>
+                                <span class="meter-max-note" id="hopeMaxNote">/10</span>
+                            </div>
+
+                            <div class="hp-bonus-row" style="margin-top: 3px; margin-bottom: 18px; flex-direction: row;">
+                                <label>Bônus Manual HOPE</label><input type="number" id="hopeManualBonus" value="0" min="0">
+                                <button class="meter-btn no-print" id="manualHopeMinus">-</button>
+                                <button class="meter-btn no-print" id="manualHopePlus">+</button>
+                            </div>
+
+                            <!-- LOVE barra -->
+                            <div class="meter-row">
+                                <span class="meter-label">LOVE</span>
+                                <button class="meter-btn no-print" id="loveMinus">−</button>
+                                <div class="meter-bar-wrap" id="loveBarWrap" title="Clique para ajustar LOVE (máx 20)">
+                                    <div class="meter-bar love" id="loveBar" style="width:0%;"></div>
+                                    <span class="meter-bar-label" id="loveBarLabel">0 / 20</span>
+                                </div>
+                                <button class="meter-btn no-print" id="lovePlus">+</button>
+                            </div>
+
+                            <!-- KARMA barra (limite 50) -->
+                            <div class="karma-row">
+                                <div class="popUp">
+                                    <input class="popUpInput" type="text" id="popUpKarma">
+                                </div>
+                                <span class="meter-label">KARMA</span>
+                                <div class="karma-stepper" style="display:flex;gap:4px;align-items:center;">
+                                    <button id="karmaMinus">−</button>
+                                    <span class="karma-val" id="karmaVal">0</span>
+                                    <button id="karmaPlus">+</button>
+                                </div>
+                                <div class="karma-track" id="karmaTrack">
+                                    <div class="karma-center"></div>
+                                    <div class="karma-fill" id="karmaFill" style="width:0%;left:50%;background:var(--green);"></div>
+                                    <span class="karma-label-inside" id="karmaLabelInside">0 / 50</span>
+                                </div>
+                            </div>
+
+                            <!-- ATK DEF MAG juntos -->
+                            <div class="stat-grid">
+                                <div class="stat-box">
+                                    <div class="stat-label">ATK</div>
+                                    <div class="stat-val" id="statAtk">0</div>
+                                    <div class="stat-bonus"><label>Bônus</label><input type="number" id="atkBonus" value="0" min="0" oninput="if(parseInt((this).value) > 99999) this.value = 99999;"></div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-label">DEF</div>
+                                    <div class="stat-val" id="statDef">0</div>
+                                    <div class="stat-bonus"><label>Bônus</label><input type="number" id="defBonus" value="0" min="0" oninput="if(parseInt((this).value) > 99999) this.value = 99999;"></div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-label">MAG</div>
+                                    <div class="stat-val" id="statMag">0</div>
+                                    <div class="stat-bonus"><label>Bônus</label><input type="number" id="magBonus" value="0" min="0" oninput="if(parseInt((this).value) > 99999) this.value = 99999;"></div>
+                                </div>
+                            </div>
+                            <!-- rolador de dados -->
+                            <!-- <div class="dice-box no-print">
+                                <div style="font-family:var(--font-d);font-size:13px;color:var(--soul);margin-bottom:8px;">⚄ ROLADOR DE DADOS</div>
+                                <div class="dice-controls">
+                                    <div><label class="f">Qtd</label><input type="number" id="diceQty" class="tiny" value="1" min="1" max="20"></div>
+                                    <button class="btn" id="btnRollDano">🎲 Dano (ATK)</button>
+                                    <button class="btn" id="btnRollMag">✨ Dano (MAG)</button>
+                                    <div><label class="f">Mod</label><input type="number" id="diceMod" class="tiny" value="0"></div>
+                                </div>
+                                <div class="dice-result" id="diceResult">Resultado aparecerá aqui.</div>
+                                <div class="dice-log" id="diceLog"></div>
+                            </div> -->
+                        </div>
+
+                        <div class="panel-box" style="width: 50%;">
+                            <div class="panel-title" style="top: -15px;">
+                                <span class="ic">✦</span> INVENTÁRIO
+                            </div>
+
+                            <div id="itemsList" class="items-list"></div>
+                            <div class="add-row no-print" style="margin-top:6px;">
+                                <button class="btn primary" id="btnAddItem" style="font-size:11px;padding:4px 8px;">+ Slot de Item</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================== PAGE 3: INFO =================== -->
+        <section class="page" id="page3">
+            <div class="sheet-title">ALMA &amp; HABILIDADES</div>
+            <div class="page-body">
+
+                <div class="titulos-equips">
+                    <div style="width: 50%;">
+                        <div class="panel-title-equips"><span class="ic">◈</span> PERSONAGEM</div>
+                    </div>
+                    <div style="width: 50%;">
+                        <div class="panel-title-equips"><span class="ic">♥</span> INFO</div>
+                    </div>
+                </div>
+
+                <!-- Parte de Cima: foto + info -->
+                <div class="row" style="height: 30%; position: relative;">
+                    <div class="portrait-wrap" style="width: 30%;">
+                        <div class="portrait" id="portraitBtn3">
+                            <svg class="soul-spark" viewBox="0 0 24 24" id="soulSvg3"><path d="M12 0 L14 9 L24 12 L14 15 L12 24 L10 15 L0 12 L10 9 Z"/></svg>
+                            <img id="portraitImg3" style="display:none;">
+                        </div>
+                    </div>
+
+                    <div class="panel-box" style="height: 100%; width: 40%; display: flex; flex-direction: column; justify-content: space-around;">
+                        <div class="soul-row" style="margin-bottom:6px;">
+                            <label class="f" style="margin-right: 15px;">Alma</label>
+                            <div class="soul-swatch" id="soulSwatch"></div>
+                            <select id="infoAlma" style="flex:1;">
+                                <option value="Determinação">Determinação (Vermelho)</option>
+                                <option value="Bravura">Bravura (Laranja)</option>
+                                <option value="Justiça">Justiça (Amarelo)</option>
+                                <option value="Perseverança">Perseverança (Roxo)</option>
+                                <option value="Bondade">Bondade (Verde)</option>
+                                <option value="Integridade">Integridade (Azul)</option>
+                                <option value="Paciência">Paciência (Ciano)</option>
+                                <option value="Monstro">Monstro (Branco)</option>
+                                <option value="Darkner">Darkner (Roxo Escuro)</option>
+                                <option value="Personalizada">Personalizada...</option>
+                            </select>
+                        </div>
+                        <div id="elementoAlmaBox" style="display:none;margin-bottom:6px;">
+                            <label class="f">Elemento</label>
+                            <input type="text" id="infoElementoAlma" placeholder="ex: Fogo, Gelo, Sombra...">
+                        </div>
+                        <div id="customAlmaBox">
+                            <label class="f" style="margin:0;">Cor personalizada:</label>
+                            <input type="color" id="almaColorPicker" value="#cd0b22" style="width:42px;flex:0 0 42px;height:28px;padding:1px;cursor:pointer;">
+                            <input type="text" id="almaColorText" placeholder="#rrggbb" style="flex:1;">
+                        </div>
+
+                        <div class="field-pair" style="margin-top:10px;">
+                            <label class="f">Classe</label><input type="text" class="campoInfo" id="infoClasse" placeholder="ex: Lutador">
+                        </div>
+                        <div class="field-pair">
+                            <label class="f">Trilha</label><input type="text" class="campoInfo" id="infoTrilha" placeholder="ex: Impactante">
+                        </div>
+
+                    </div>
+
+                    <!-- Bônus de classe -->
+                    <div style="width: 30%;">
+                        <div class="subtle" style="margin-bottom: 10px;">Bônus de classe <br>(ultrapassam limite normal)</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                            <div>
+                                <label class="f">+1 atributo</label><select id="classAtrUp"></select>
+                            </div>
+                            <div>
+                                <label class="f">−1 atributo</label><select id="classAtrDown"></select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="f">+1 perícia</label><select id="classPericiaBonus"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COL 2: habilidades -->
+
+                <div class="panel-box" style="display: flex; flex-direction: column; height: 70%;">
+                    <div class="titulos-equips" style="justify-content: flex-start; align-items: center; gap: 20px;">
+                        <div class="panel-title-equips"><span class="ic">✦</span> MAGIAS E HABILIDADES</div>
+                        <div class="no-print">
+                            <button class="btn primary" id="btnAddHab">+ Adicionar habilidade / magia</button>
+                        </div>
+                    </div>
+
+                    <div id="habilidadesList" class="lista-habilidades-dinamica" style="margin-top:6px;"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- =================== PAGE 4: MAGIAS E HABILIDADES =================== -->
+        <!-- <section class="page" id="page4">
+            <div class="titulos-equips">
+                <div class="panel-title-equips"><span class="ic">✦</span> MAGIAS E HABILIDADES</div>
+            </div>
+            <div class="page-body" style="height: 1000px;">
+                <div class="panel-box" style="flex: 1; display: flex; flex-direction: column;">
+                    
+                    <div id="habilidadesList" class="grid-habilidades"></div>
+
+                    <div class="extras-box" style="margin-top: 10px;">
+                        <label class="f">HABILIDADES E MAGIAS EXTRAS</label>
+                        <textarea id="habExtras" rows="3" placeholder="..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- =================== PAGE 5: ANOTAÇÕES =================== -->
+        <section class="page" id="page5">
+            <div class="page-body">
+                <div class="sheet-title">ANOTAÇÕES</div>
+                <div class="notes-grid">
+                    <div style="display: flex; flex-direction: column;">
+                        <label class="f">Anotações I</label>
+                        <textarea id="notes1" placeholder="..."></textarea>
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                        <label class="f">Anotações II</label>
+                        <textarea id="notes2" placeholder="..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>

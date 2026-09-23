@@ -1,0 +1,71 @@
+/** Name: core.css
+Author: Mennonimo
+Date: 17/07
+Description: Predefinições e parâmetros chaves e globais do style
+**/
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+@font-face {
+    font-family: 'MonsterFriend';
+    src: url('fonts/MonsterFriendFore.otf');
+}
+
+@font-face {
+    font-family: 'PixelOp';
+    src: url('fonts/PixelOperator8.ttf');
+}
+
+:root {
+    --red: #cd0b22;
+    --orange: #fd7b1e;
+    --yellow: #ffb422;
+    --purple: #a348a3;
+    --green: #23b04b;
+    --blue: #236bf2;
+    --cyan: #4fd6ff;
+    --bg: #06070f;
+    --bg2: #0a0c1c;
+    --panel: #0c0d18;
+    --panel2: #10101f;
+    --border: #cdd0ef;
+    --border-dim: #3c3f63;
+    --text: #eef0ff;
+    --text-dim: #9296c0;
+    --soul: #ffffff;
+    --box-battle: #ff8706;
+    --soul-glow: rgba(255, 255, 255, .2);
+    --font-d: 'MonsterFriend', 'Press Start 2P', 'VT323', cursive;
+    --font-b: 'VT323', 'PixelOp', 'Press Start 2P', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-b);
+    font-size: 15px;
+    -webkit-font-smoothing: none;
+}
+
+
+/* ---- gradient bg from index.html ---- */
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, #000000 0%, #000000 40%, var(--soul) 100%);
+    opacity: .42;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}

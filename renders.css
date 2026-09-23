@@ -1,0 +1,996 @@
+/** Name: renders.css
+Author: Mennonimo
+Date: 17/07
+Description: Definições de layout para cada parte das renders (um pouco bruto no código)
+**/
+
+
+/* ---- Dice box ---- */
+
+.dice-box {
+    border: 2px solid var(--border-dim);
+    background: #0a0a16;
+    padding: 12px;
+    margin-top: 10px;
+}
+
+.dice-controls {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.dice-result {
+    margin-top: 8px;
+    min-height: 48px;
+    font-size: 13px;
+    padding: 8px;
+    border: 1px dashed var(--border-dim);
+    background: #070713;
+}
+
+.dice-result .total {
+    font-size: 22px;
+    color: var(--soul);
+    font-weight: bold;
+}
+
+.dice-log {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    max-height: 64px;
+    overflow: auto;
+}
+
+
+/* ---- Meter +/- buttons ---- */
+
+.meter-btn {
+    width: 40px;
+    height: 30px;
+    border: 1px solid var(--border-dim);
+    background: #0a0a16;
+    color: var(--text);
+    cursor: pointer;
+    font-family: var(--font-b);
+    font-size: 14px;
+    line-height: 1;
+    flex: 0 0 22px;
+    padding: 0;
+}
+
+.meter-btn:hover {
+    border-color: var(--soul);
+    color: #fff;
+}
+
+.meter-btn-full {
+    font-size: 11px;
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.meter-btn-full:hover {
+    background: var(--red);
+    color: #fff;
+}
+
+
+/* ---- HP / HOPE / LOVE progress bars ---- */
+
+.meter-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-block: 12px;
+}
+
+.row-status {
+    display: flex;
+    flex-direction: row;
+}
+
+.meter-label {
+    display: flex;
+    font-size: 17px;
+    font-family: var(--font-d);
+    color: var(--text);
+}
+
+.meter-bar-wrap {
+    flex: 1;
+    position: relative;
+    height: 22px;
+    background: #0a0a16;
+    border: 1px solid var(--border-dim);
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    min-width: 60px;
+}
+
+.meter-bar {
+    height: 100%;
+    transition: width .15s;
+    position: absolute;
+    left: 0;
+    top: 0;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+.meter-bar.hp {
+    background: var(--red);
+}
+
+.meter-bar.hope {
+    background: var(--yellow);
+}
+
+.meter-bar.love {
+    background: var(--purple);
+}
+
+.meter-bar-label {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.meter-max-note {
+    font-size: 18px;
+    color: var(--text-dim);
+    flex: 0 0 auto;
+}
+
+.hp-bonus-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    margin-block: 12px;
+}
+
+.hp-bonus-row>div {
+    flex: 1;
+}
+
+.hp-bonus-row label {
+    font-size: 17px;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 2px;
+    text-wrap: no-wrap;
+}
+
+.hp-bonus-row input[type=number] {
+    flex: 1;
+    font-size: 18px;
+    padding: 2px 4px;
+    text-align: center;
+}
+
+.hp-bonus-row input[type=text] {
+    width: 100%;
+    font-size: 18px;
+    padding: 2px 4px;
+    text-align: center;
+    background: transparent;
+    border: 1px solid var(--border-dim);
+    color: var(--text);
+    border-radius: 0px;
+}
+
+.popUp {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-self: center;
+    top: -40px;
+    left: 50%;
+    width: 200px;
+    height: 60px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    background-color: transparent;
+}
+
+input[type=text].popUpInput {
+    width: 100px;
+    height: 40px;
+    background-color: var(--panel);
+    border: 1px solid #fff;
+    border-radius: 2px;
+    color: #fff;
+    font-family: var(--font-b);
+    font-size: 18px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(6px);
+    transition: all 0.3s ease-in-out;
+}
+
+input[type=text].popUpInput:focus {
+    border-color: var(--soul);
+}
+
+.meter-row:has(.meter-bar-wrap:hover) .popUpInput,
+.meter-row:has(.popUp:hover) .popUpInput,
+.meter-row:has(.popUpInput:hover) .popUpInput,
+input[type=text].popUpInput:focus {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0px);
+}
+
+.karma-row:has(.karma-track:hover) .popUpInput,
+.karma-row:has(.popUp:hover) .popUpInput,
+.karma-row:has(.popUpInput:hover) .popUpInput,
+input[type=text].popUpInput:focus {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0px);
+}
+
+.meter-row:has(.meter-bar-wrap:hover) .popUp,
+.meter-row:has(.popUpInput:hover) .popUp,
+.meter-row:has(.popUp:hover) .popUp {
+    pointer-events: auto;
+}
+
+.karma-row:has(.karma-track:hover) .popUp,
+.karma-row:has(.popUpInput:hover) .popUp,
+.karma-row:has(.popUp:hover) .popUp {
+    pointer-events: auto;
+}
+
+
+/* ---- Karma bar ---- */
+
+.karma-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.karma-track {
+    flex: 1;
+    height: 25px;
+    background: #0a0a16;
+    border: 1px solid var(--border-dim);
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.karma-center {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--border-dim);
+    z-index: 1;
+}
+
+.karma-fill {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition: width .15s;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+.karma-label-inside {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.karma-val {
+    font-family: var(--font-d);
+    min-width: 38px;
+    text-align: center;
+    color: var(--soul);
+    font-size: 13px;
+}
+
+.karma-stepper button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--border-dim);
+    background: #0a0a16;
+    color: var(--text);
+    cursor: pointer;
+    font-family: var(--font-b);
+    font-size: 20px;
+}
+
+.karma-stepper button:hover {
+    border-color: var(--soul);
+}
+
+
+/* ---- Lista de Habilidades Dinâmicas ---- */
+
+.lista-habilidades-dinamica {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    overflow-y: none;
+    padding-right: 6px;
+    margin-top: 10px;
+}
+
+
+/* Card individual */
+
+.hab-card {
+    width: 19%;
+    border: 1px solid var(--border-dim);
+    background: #0a0a16;
+    padding: 8px 10px;
+    padding-top: 22px;
+    /* Espaço para o botão X e o puxador */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+
+/* Efeito ao arrastar (Drag & Drop) */
+
+.hab-card.dragging {
+    opacity: 0.35;
+    cursor: grabbing;
+}
+
+.hab-card.drag-over {
+    border-color: var(--soul);
+    box-shadow: 0 0 0 1px var(--soul);
+}
+
+
+/* Puxador de arrastar (⠿) */
+
+.hab-drag-handle {
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    color: var(--text-dim);
+    font-size: 14px;
+    cursor: grab;
+    user-select: none;
+    line-height: 1;
+}
+
+.hab-drag-handle:hover {
+    color: var(--soul);
+}
+
+
+/* Botão de remover (X) */
+
+.hab-card .remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: transparent;
+    border: 1px solid var(--red);
+    color: var(--red);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.hab-card .remove:hover {
+    background: var(--red);
+    color: #fff;
+}
+
+
+/* Linha superior: Nome, Custo e Elemento */
+
+.hab-top-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.2fr;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+
+/* Neutraliza o tamanho de 30px herdado do structures.css */
+
+.hab-top-row label.f,
+.hab-desc-wrap label.f {
+    font-size: 13px !important;
+    margin-bottom: 2px;
+    display: block;
+    color: var(--text-dim);
+}
+
+.hab-top-row input[type=text] {
+    width: 100%;
+    height: 26px;
+    background: transparent;
+    border: 1px solid var(--border-dim);
+    border-radius: 2px;
+    color: var(--text);
+    font-size: 14px;
+    padding: 2px 6px;
+    transition: border-color 0.2s;
+}
+
+.hab-top-row input[type=text]:hover,
+.hab-top-row input[type=text]:focus,
+.hab-desc-wrap textarea:focus {
+    border-color: var(--soul);
+    outline: none;
+}
+
+
+/* Área da Descrição */
+
+.hab-desc-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+.hab-desc-wrap textarea {
+    width: 100%;
+    flex: 1;
+    min-height: 48px;
+    background: transparent;
+    border: 1px solid var(--border-dim);
+    border-radius: 2px;
+    color: var(--text);
+    font-size: 13px;
+    padding: 4px 6px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+
+/* Barra de rolagem estilizada para combinar com o tema */
+
+.lista-habilidades-dinamica::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lista-habilidades-dinamica::-webkit-scrollbar-track {
+    background: #06070f;
+}
+
+.lista-habilidades-dinamica::-webkit-scrollbar-thumb {
+    background: var(--border-dim);
+    border-radius: 2px;
+}
+
+.lista-habilidades-dinamica::-webkit-scrollbar-thumb:hover {
+    background: var(--soul);
+}
+
+
+/* ---- Magias e Habilidades ---- */
+
+.grid-habilidades {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    gap: 8px;
+    height: calc(100% - 90px);
+}
+
+.hab-card-fixo {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.hab-top-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-right: 20px;
+}
+
+.hab-card-fixo textarea {
+    flex: 1;
+    min-height: 0;
+    resize: none;
+    font-size: 18px;
+    margin-top: 2px;
+}
+
+.hab-card-fixo input[type=text] {
+    flex: 1;
+    background-color: transparent;
+    border: 3px solid var(--border-dim);
+    border-radius: 7px;
+    font-size: 18px;
+}
+
+.extras-box {
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+}
+
+.extras-box textarea {
+    flex: 1;
+}
+
+.extras-box .f {
+    font-size: 25px;
+}
+
+
+/* ---- Items ---- */
+
+#itemsList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3px 8px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    ;
+}
+
+.item-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 75px;
+    border: 1px solid var(--border-dim);
+    background: #0a0a16;
+    border-radius: 2px;
+}
+
+.item-title {
+    position: relatoive;
+    display: flex;
+    height: 35%;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 2px;
+    font-size: 18px;
+    color: var(--text-dim);
+    font-family: var(--font-d);
+}
+
+.item-title span {
+    font-family: var(--font-b);
+    font-size: 30px;
+    margin-inline: 5px;
+    color: var(--soul);
+}
+
+.item-card input[type=text] {
+    width: 100%;
+    font-size: 22px;
+    height: 90%;
+    padding: 1px 3px;
+    margin: 0;
+    background: transparent;
+    border: 1px solid var(--border-dim);
+    border-radius: 0px;
+}
+
+.item-card textarea {
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    font-size: 16px;
+    line-height: 1.1;
+    height: 65%;
+    padding: 2px 3px;
+    resize: none;
+    overflow-y: none;
+    min-height: 0px;
+}
+
+.item-rm-btn {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid var(--red);
+    color: var(--red);
+    width: 16px;
+    height: 16px;
+    margin-inline: 5px;
+    cursor: pointer;
+    font-size: 9px;
+    line-height: 1;
+    padding: 0;
+    flex: 0 0 14px;
+}
+
+.item-rm-btn:hover {
+    background: var(--red);
+    color: #fff;
+}
+
+
+/* ---- Equip ---- */
+
+.row-equips {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.panel-equips {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.equip-box {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px dashed var(--border-dim);
+    border-radius: 4px;
+    padding: 7px;
+    margin-bottom: 7px;
+}
+
+.equip-box .eq-title {
+    font-size: 15px;
+    color: var(--soul);
+    margin-bottom: 3px;
+    font-family: var(--font-d);
+    letter-spacing: 1px;
+    margin-right: 10px;
+}
+
+.equip-box textarea {
+    min-height: 102px;
+}
+
+input[type=text].inputarEq {
+    border-radius: 4px;
+    font-size: 20px;
+    width: 100%;
+}
+
+
+/* ---- Skills ---- */
+
+.pericias-tab {
+    display: flex;
+    flex-direction: column;
+}
+
+.skill-group {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-block: 4.2px;
+}
+
+.skill-group .group-head {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 15px;
+    width: 26px;
+    border-bottom: 1px solid;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+.group-head {
+    transform: scale(1.3, 1);
+}
+
+.skill-row {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 33%;
+    height: 60px;
+    padding-inline: 5px;
+}
+
+.skill-name {
+    display: flex;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: underline dotted var(--text-dim);
+    margin-inline: 2px;
+}
+
+.skill-name:hover {
+    color: var(--soul);
+}
+
+.skill-pips-wrap {
+    display: flex;
+    gap: 2px;
+    flex: 1;
+}
+
+.skill-pip {
+    width: 11px;
+    height: 11px;
+    border: 2px solid var(--border-dim);
+    border-radius: 2px;
+    background: transparent;
+    cursor: pointer;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+.skill-pip.filled {
+    background: var(--soul);
+}
+
+.skill-pip.locked {
+    opacity: .25;
+    cursor: not-allowed;
+}
+
+.skill-val {
+    font-size: 11px;
+    min-width: 14px;
+    text-align: center;
+}
+
+.skill-bonus-inp {
+    width: 34px !important;
+    font-size: 11px;
+    padding: 2px !important;
+    text-align: center;
+}
+
+input[type=number].skill-num-inp {
+    width: 65px;
+    height: 30px;
+    font-family: 24px;
+}
+
+.skill-dice {
+    width: 170px;
+    height: 100px;
+    right: -10%;
+    padding: 20px 6px 0px 6px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--panel);
+    border: 2px solid #fff;
+    z-index: 4;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(6px);
+    transition: all 0.3s ease-out 0.3s;
+}
+
+.skill-dice h1 {
+    font-size: 22px;
+    margin: 0px;
+}
+
+.skill-roll-result {
+    font-size: 22px;
+    color: var(--yellow);
+}
+
+.skill-resultado {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--soul);
+    transform: scale(1.2, 1);
+    padding-inline: 2px;
+    text-align: center;
+    transition: color 0.3s ease, transform 0.3s ease 0.3s;
+}
+
+.skill-resultado-dice {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--soul);
+    transform: scale(1.2, 1);
+    padding-inline: 2px;
+    text-align: center;
+}
+
+.skill-box {
+    opacity: 0;
+}
+
+.cancel-dado {
+    width: calc(100% + 12px);
+    height: 40%;
+    background: #15172b;
+    border: 1px solid var(--border-dim);
+    color: var(--text-dim);
+    font-family: var(--font-b);
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.cancel-dado:hover {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.skill-row:has(.skill-dice:hover) .skill-resultado,
+.skill-resultado:hover {
+    color: #fff;
+    transform: scale(2);
+}
+
+.skill-dice::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 100%;
+    /* Começa colado na borda direita do skill-dice */
+    width: 60px;
+    /* Cobre todo o espaço vazio até encostar no resultado */
+    height: calc(100% + 20px);
+    background: transparent;
+    pointer-events: auto;
+}
+
+.skill-row:has(.skill-resultado:hover) .skill-dice,
+.skill-row:has(.skill-dice:hover) .skill-dice {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    transform: translateY(0px);
+    transition-delay: 0.5s;
+}
+
+.skill-row:has(.skill-resultado:hover) .skill-box,
+.skill-row:has(.skill-box:hover) .skill-box,
+.skill-row:has(.skill-dice:hover) .skill-box {
+    opacity: 1;
+}
+
+
+/* ---- Attributes ---- */
+
+.attr-row {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 8px;
+}
+
+.attr-tag {
+    display: flex;
+    font-family: var(--font-d);
+    font-size: 16px;
+    text-align: center;
+    color: var(--text);
+    border-radius: 4px;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.attr-name-lbl {
+    flex: 0 0 60px;
+    font-size: 11px;
+    color: var(--text-dim);
+}
+
+.pips {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.pip {
+    width: 13px;
+    height: 13px;
+    border: 2px solid var(--border-dim);
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+}
+
+.pip.filled {
+    background: var(--soul);
+}
+
+.pip.locked {
+    opacity: .25;
+    cursor: not-allowed;
+}
+
+.attr-val {
+    min-width: 36px;
+    font-size: 11px;
+    text-align: center;
+    color: var(--text);
+}
+
+.attr-bonus-inp {
+    width: 36px !important;
+    font-size: 11px;
+    padding: 2px 3px !important;
+    text-align: center;
+}
+
+.attr-roll-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--border-dim);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 13px;
+    font-family: var(--font-b);
+}
+
+.attr-roll-btn:hover {
+    border-color: var(--soul);
+    color: #fff;
+}
+
+.attr-roll-result {
+    font-size: 10px;
+    color: var(--yellow);
+    min-height: 12px;
+    font-family: var(--font-b);
+}
+
+.iconeAtt {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
