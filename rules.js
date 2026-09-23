@@ -19,8 +19,8 @@ const ATTRS = [
   { key: 'GRR', name: 'Garra', clr: 'var(--red)', img: 'Garra.png' },
   { key: 'FRM', name: 'Firmeza', clr: 'var(--orange)', img: 'Firmeza.png' },
   { key: 'RPZ', name: 'Rapidez', clr: 'var(--yellow)', img: 'Rapidez.png' },
-  { key: 'ESP', name: 'Esperteza', clr: 'var(--purple)', img: 'Garra.png' },
-  { key: 'CHM', name: 'Charme', clr: 'var(--green)', img: 'Esperteza.png' },
+  { key: 'ESP', name: 'Esperteza', clr: 'var(--purple)', img: 'Esperteza.png' },
+  { key: 'CHM', name: 'Charme', clr: 'var(--green)', img: 'charme.png' },
   { key: 'MRL', name: 'Moral', clr: 'var(--blue)', img: 'Moral.png' },
 ];
 const SKILL_MAP = {

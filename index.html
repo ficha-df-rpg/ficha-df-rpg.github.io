@@ -183,17 +183,13 @@ Description: Ficha interativa de rpg para um sistema de Don't Forget contendo a 
                         </div>
 
                         <div class="panel-equips">
-                            <div class="equip-box" style="height: 80px;">
-
-                                <div style="display: flex; flex-direction: row; align-items: center;">
-                                    <div class="eq-title">ARMA</div>
-                                    <input type="text" class="inputarEq" id="eqArmaNome" placeholder="Nome da arma" style="margin-bottom:3px;">
-                                </div>
-
-                                <div style="display: flex; flex-direction: row; width: max-content; padding-left: 10px;">
-                                    <div style="padding-inline: 8px;"><label class="f" style="font-size:12px;">Categoria</label><input type="text" class="inputarEq" id="eqArmaCategoria" placeholder="ex: Espada"></div>
-                                    <div style="padding-inline: 8px;"><label class="f" style="font-size:12px;">Tipo</label><input type="text" class="inputarEq" id="eqArmaTipo" placeholder="ex: Cortante"></div>
-                                </div>
+                            <div class="equip-box" style="height: 80px; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; justify-items: center;">
+                                <div class="eq-title">ARMA</div>
+                                <label class="f" style="font-size:14px; color: var(--soul); font-family: var(--font-d);">Categoria</label>
+                                <label class="f" style="font-size:14px; color: var(--soul); font-family: var(--font-d);">Tipo</label>
+                                <input type="text" class="inputarEq" id="eqArmaNome" placeholder="Nome da arma">
+                                <input type="text" class="inputarEq" id="eqArmaCategoria" placeholder="ex: Espada">
+                                <input type="text" class="inputarEq" id="eqArmaTipo" placeholder="ex: Cortante">
                                 <!-- <textarea id="eqArmaDesc" rows="2" placeholder="Descrição / efeito"></textarea> -->
                             </div>
                             <div class="equip-box" style="width: 75%;">
@@ -251,7 +247,6 @@ Description: Ficha interativa de rpg para um sistema de Don't Forget contendo a 
                                     <span class="meter-bar-label" id="hopeBarLabel">10 / 10</span>
                                 </div>
                                 <button class="meter-btn no-print" id="hopePlus">+</button>
-                                <span class="meter-max-note" id="hopeMaxNote">/10</span>
                             </div>
 
                             <div class="hp-bonus-row" style="margin-top: 3px; margin-bottom: 18px; flex-direction: row;">
@@ -451,7 +446,7 @@ Description: Ficha interativa de rpg para um sistema de Don't Forget contendo a 
         <!-- =================== PAGE 5: ANOTAÇÕES =================== -->
         <section class="page" id="page5">
             <div class="page-body">
-                <div class="sheet-title">ANOTAÇÕES</div>
+                <!-- <div class="sheet-title">ANOTAÇÕES</div> -->
                 <div class="notes-grid">
                     <div style="display: flex; flex-direction: column;">
                         <label class="f">Anotações I</label>

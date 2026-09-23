@@ -207,7 +207,9 @@ input[type=text].campoInfo {
 }
 
 .add-row {
-    margin-top: 6px;
+    position: absolute;
+    top: -20px;
+    right: 5%;
 }
 
 .field-pair {

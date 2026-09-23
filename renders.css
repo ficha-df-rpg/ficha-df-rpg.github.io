@@ -339,18 +339,20 @@ input[type=text].popUpInput:focus {
 
 .lista-habilidades-dinamica {
     display: flex;
+    flex-direction: row;
     gap: 15px;
     flex: 1;
     overflow-y: none;
     padding-right: 6px;
     margin-top: 10px;
+    overflow-x: auto;
 }
 
 
 /* Card individual */
 
 .hab-card {
-    width: 19%;
+    min-width: 175px;
     border: 1px solid var(--border-dim);
     background: #0a0a16;
     padding: 8px 10px;
@@ -387,6 +389,7 @@ input[type=text].popUpInput:focus {
     cursor: grab;
     user-select: none;
     line-height: 1;
+    transition: all 0.2s ease;
 }
 
 .hab-drag-handle:hover {
@@ -412,6 +415,7 @@ input[type=text].popUpInput:focus {
     align-items: center;
     justify-content: center;
     padding: 0;
+    transition: all 0.2s ease;
 }
 
 .hab-card .remove:hover {
@@ -456,6 +460,7 @@ input[type=text].popUpInput:focus {
 .hab-top-row input[type=text]:focus,
 .hab-desc-wrap textarea:focus {
     border-color: var(--soul);
+    border-width: 1px;
     outline: none;
 }
 
@@ -568,7 +573,9 @@ input[type=text].popUpInput:focus {
     gap: 3px 8px;
     width: 100%;
     height: 100%;
+    padding-right: 7px;
     box-sizing: border-box;
+    overflow-y: auto
     ;
 }
 
@@ -577,7 +584,7 @@ input[type=text].popUpInput:focus {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    height: 75px;
+    min-height: 100px;
     border: 1px solid var(--border-dim);
     background: #0a0a16;
     border-radius: 2px;
@@ -646,6 +653,22 @@ input[type=text].popUpInput:focus {
     color: #fff;
 }
 
+#itemsList::-webkit-scrollbar {
+    width: 7px;
+}
+
+#itemsList::-webkit-scrollbar-track {
+    background: #06070f;
+}
+
+#itemsList::-webkit-scrollbar-thumb {
+    background: var(--border-dim);
+    border-radius: 2px;
+}
+
+#itemsList::-webkit-scrollbar-thumb:hover {
+    background: var(--soul);
+}
 
 /* ---- Equip ---- */
 
@@ -691,7 +714,7 @@ input[type=text].popUpInput:focus {
 input[type=text].inputarEq {
     border-radius: 4px;
     font-size: 20px;
-    width: 100%;
+    width: 90%;
 }
 
 
