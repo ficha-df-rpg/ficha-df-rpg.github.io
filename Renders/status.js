@@ -28,7 +28,6 @@ function renderStatus() {
     const hopeMax = calcHopeMax();
     if (state.status.hopeCur === null || state.status.hopeCur === undefined) state.status.hopeCur = hopeMax;
     state.status.hopeCur = clamp(state.status.hopeCur, 0, hopeMax);
-    el('hopeMaxNote').textContent = '/' + hopeMax;
     el('hopeManualBonus').value = state.status.hopeManualBonus || 0;
     buildBar('hopeBar', 'hopeBarLabel', state.status.hopeCur, hopeMax);
 
