@@ -42,10 +42,10 @@ const SOUL_FONT_COLOR = {
 };
 
 /* ---- Formulas ---- */
-function attrMax(lvl) { return 5 + 2 * (Math.max(1, Math.min(7, lvl)) - 1); }
+function attrMax(lvl) { return 4 + 1 * (Math.max(1, Math.min(7, lvl)) - 1); }
 function poolTotal(lvl) {
   lvl = Math.max(1, Math.min(7, lvl));
-  let b = 12 + 3 * (lvl - 1); if (lvl >= 7) b += 3; return b;
+  let b = 10 + 2 * (lvl - 1); if (lvl >= 7) b += 2; return b;
 }
 function skillCap(lvl) { return Math.floor(attrMax(lvl) / 2); }
 
