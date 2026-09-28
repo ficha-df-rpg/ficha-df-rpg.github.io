@@ -118,5 +118,5 @@ function calcATK() { return Math.max(0, effAttr('GRR') * 5 + (state.status.atkBo
 function calcDEFbase() { return Math.max(0, effAttr('FRM') * 3 + (state.status.love || 0) * 2); } // Cálculo de mecânica de defesa limpa
 function calcDEF() { return Math.max(0, calcDEFbase() + (state.status.defBonus || 0)); } // Cálculo da defesa base somada aos bonus
 function calcMAG() { return Math.max(0, effAttr('ESP') * 5 + (state.status.magBonus || 0)); } // Calcular Dano Mágico
-function calcHPMax() { return Math.max(1, calcDEFbase() + (state.status.hpClassBonus || 0) + (state.status.hpManualBonus || 0) + Math.max(0, (state.level || 1) - 1) * 20); } //Cálculo do HP máximo sendo a soma da defesa base, bonus de hp e bonus manual
+function calcHPMax() { return Math.max(1, calcDEFbase() + (state.status.hpClassBonus || 0) + (state.status.hpManualBonus || 0) + Math.max(0, (state.level || 1) - 1) * 15); } //Cálculo do HP máximo sendo a soma da defesa base, bonus de hp e bonus manual
 function calcHopeMax() { return 5 + effAttr('MRL') * 2 + (state.status.hopeManualBonus || 0); } // Cálculo de esperânça máxima
